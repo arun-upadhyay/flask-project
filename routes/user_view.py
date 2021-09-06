@@ -4,7 +4,6 @@ from models.User import User
 
 user_view = Blueprint('user_view', __name__, template_folder='/templates')
 
-
 @user_view.route('/', methods=['GET'])
 def home():
     try:
@@ -67,4 +66,16 @@ def add_user():
         password = str(_form["password"])
         user = User()
         user.add_user(username, password)
+        return redirect('/dashboard')
+
+
+@user_view.route('/user/edit/user/update', methods=['POST'])
+def update_user():
+    if request.method == 'POST':
+        _form = request.form
+        username = str(_form["username"])
+        password = str(_form["password"])
+        userId = str(_form["id"])
+        user = User()
+        user.update_user(username, password, userId)
         return redirect('/dashboard')

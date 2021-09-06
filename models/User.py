@@ -22,7 +22,7 @@ class User:
         user = cur.fetchone()
         if user is not None:
             return {
-                'key': user[0],
+                'id': user[0],
                 'username': user[1],
                 'password': user[2]
             }
@@ -42,6 +42,15 @@ class User:
 
     def delete_user(self, id):
         sql = "DELETE FROM users WHERE id = {}".format(id);
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        self.conn.commit()
+        print("Record has been successfully deleted")
+        return True
+
+    def update_user(self, username, password, userId):
+        sql = "UPDATE users SET username='{}', password='{}'  WHERE id ={}".format(username, password, userId);
+        print(sql)
         cur = self.conn.cursor()
         cur.execute(sql)
         self.conn.commit()

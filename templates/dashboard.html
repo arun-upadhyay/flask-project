@@ -22,6 +22,13 @@
         <h3>Add User</h3>
         <form action="user/add" method="POST">
     {% endif %}
+    {% if userRecord is defined %}
+        <div class="form-group">
+            <label for="ID">ID</label>
+            <input type="text" class="form-control" id="id" placeholder="User Id" name="id"
+                   value="{{ userRecord.id }}" readonly>
+        </div>
+    {% endif %}
     <div class="form-group">
         <label for="username">Username</label>
 
@@ -32,6 +39,7 @@
             <input type="username" class="form-control" id="username" placeholder="Enter self" name="username">
         {% endif %}
     </div>
+
     <div class="form-group">
         <label for="pwd">Password:</label>
         {% if userRecord is defined %}
@@ -40,10 +48,12 @@
         {% else %}
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
         {% endif %}
+
     </div>
     <button type="submit" name="ADD" class="btn btn-primary">Submit</button>
     </form>
     <hr>
+    {% if users is defined %}
     <table class="table">
         <thead>
         <tr>
@@ -64,6 +74,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 </div>
 
 </body>
