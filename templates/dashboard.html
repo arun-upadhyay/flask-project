@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome {{ user }}</h1>
+    <hr>
+
+    {% if userRecord.key %}
+        <h3>Update User</h3>
+        <form action="user/update" method="POST">
+    {% else %}
+        <h3>Add User</h3>
+        <form action="user/add" method="POST">
+    {% endif %}
+    <div class="form-group">
+        <label for="username">Username</label>
+
+        {% if userRecord.key %}
+            <input type="username" class="form-control" id="username" placeholder="Enter self" name="username"
+                   value="{{ userRecord.username }}">
+        {% else %}
+            <input type="username" class="form-control" id="username" placeholder="Enter self" name="username">
+        {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        {% if userRecord.key %}
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password"
+                   value="{{ userRecord.password }} ">
+        {% else %}
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+        {% endif %}
+    </div>
+    <button type="submit" name="ADD" class="btn btn-primary">Submit</button>
+    </form>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for user in users %}
+            <tr>
+                <td><span>{{ user.username }}</span></td>
+                <td><span>{{ user.password }}</span></td>
+                <td><a href="/user/delete/{{ user.key }}">Delete</a>&nbsp&nbsp<a
+                        href="/user/edit/{{ user.key }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
