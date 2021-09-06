@@ -37,7 +37,8 @@ class User:
         print("Record has been successfully added")
 
     def get_all_users(self):
-        return self.conn.execute("SELECT * FROM  users ")
+        sql = "SELECT * FROM  users "
+        return self.conn.execute(sql)
 
     def delete_user(self, id):
         sql = "DELETE FROM users WHERE id = {}".format(id);

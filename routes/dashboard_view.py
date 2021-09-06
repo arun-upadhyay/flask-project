@@ -10,7 +10,6 @@ def dashboard():
     try:
         user = User()
         users = user.get_all_users()
-        print(users)
         listUsers = []
         for user in users:
             listUsers.append({
@@ -18,6 +17,7 @@ def dashboard():
                 'username': user[1],
                 'password': user[2]
             });
+
         return render_template('dashboard.html', users=listUsers)
     except TemplateNotFound:
         abort(404)
