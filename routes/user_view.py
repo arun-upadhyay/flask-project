@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, abort, request, redirect
 from jinja2 import TemplateNotFound
 from models.User import User
+from flask_jwt import JWT, jwt_required, current_identity
+
 
 user_view = Blueprint('user_view', __name__, template_folder='/templates')
 
